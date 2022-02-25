@@ -1,0 +1,22 @@
+<div id="toolbar">
+  {{message}}
+  <button *ngIf="error" (click)="gotIt()">Got It</button>
+  <button *ngIf="selectedQueue==-1 && selectedMachine==-1 && !finished && !error"(click)="drawMachine()">Add Machine</button>
+  <button *ngIf="selectedQueue==-1 && selectedMachine==-1 && !finished && !error"(click)="drawQueue()">Add Queue</button>
+  <button *ngIf="selectedQueue==-1 && selectedMachine==-1 && !finished && !error"(click)="start()">Start</button>
+  <button *ngIf="selectedQueue==-1 && selectedMachine==-1 && !error"(click)="replay()">Replay</button>
+  <button *ngIf="!finished && !error" (click)="connect(machines.get(selectedMachine), queues.get(selectedQueue), true)">Connect Q to M</button>
+  <button *ngIf="!finished && !error" (click)="connect(machines.get(selectedMachine), queues.get(selectedQueue), false)">Connect M to Q</button>
+  <button *ngIf="!finished && !error" (click)="unSelectAll()">Unselect All</button>
+  <button *ngIf="!error" (click)="clear()">Start New</button>
+  <button *ngIf="selectedQueue!=-1 && !finished && !error"(click)="MakeFirstQueue()">Make First Queue</button>
+  <button *ngIf="selectedQueue!=-1 && !finished && !error"(click)="MakeEndQueue()">Make End Queue</button>
+  Products Number<input type="number" [(ngModel)]="productsNumber">
+</div>
+
+<div style="border: 1px solid black;">
+  <canvas 
+    id="1"  width="1500px" height="650" (mousedown)="select($event)" (mousemove)="drag($event)" (mouseup)="stopDragging()"
+    #myCanvas>
+  </canvas>
+</div>
